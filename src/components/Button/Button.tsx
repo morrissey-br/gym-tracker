@@ -5,7 +5,7 @@ type Props = {
 
 export const Button = ({ children, onClick }: Props) => {
   const className =
-    "p-2 border rounded-lg text-white bg-blue-500 hover:bg-blue-600 hover:transition-colors active:bg-red-600";
+    "p-2 border rounded-lg text-white bg-transparent hover:bg-white hover:text-black hover:transition-colors";
 
   return (
     <button className={className} onClick={onClick}>
