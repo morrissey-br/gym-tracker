@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .appearance-none {
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .appearance-none::-webkit-inner-spin-button,
+  .appearance-none::-webkit-outer-spin-button {
+    appearance: none;
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
