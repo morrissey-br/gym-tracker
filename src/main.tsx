@@ -1,9 +1,9 @@
+import "./config/firebase";
+import "./index.css";
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
-import "./index.css";
-import "./config/firebase";
+import { BrowserRouter as Router } from "react-router-dom";
 import { CoreProvider } from "./hooks/useCore";
 import { ModalProvider } from "./hooks/useModal";
 

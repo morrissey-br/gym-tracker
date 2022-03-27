@@ -1,8 +1,7 @@
 import { createContext, ReactNode, useContext } from "react";
+import core, { Core } from "../core";
 
-type CoreContext = any;
-
-const defaultCoreContext: CoreContext = {};
+const defaultCoreContext: Core = core();
 
 const Context = createContext(defaultCoreContext);
 
