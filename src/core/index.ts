@@ -1,14 +1,17 @@
+import { AuthFirebase } from "./AuthFirebase";
+import authService, { AuthService } from "./AuthService";
 import { WeightMesureFirestoreRepo } from "./WeightMesureFirestoreRepo";
 import weightService, { WeightService } from "./WeightService";
 
 export interface Core {
+  authService: AuthService;
   weightService: WeightService;
 }
 
 const core = (): Core => {
-  const weightMesureRepository = WeightMesureFirestoreRepo();
   return {
-    weightService: weightService(weightMesureRepository),
+    weightService: weightService(WeightMesureFirestoreRepo()),
+    authService: authService(AuthFirebase()),
   };
 };
 
