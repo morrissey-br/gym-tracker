@@ -4,7 +4,7 @@ import { useCore } from "../../hooks/useCore";
 export default () => {
   const core = useCore();
   const [isAdding, setIsAdding] = useState(false);
-  const [weight, setWeight] = useState<number>(0);
+  const [weightInput, setWeightInput] = useState("");
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -12,7 +12,7 @@ export default () => {
     setLoading(true);
     const lastweightMesure = await core.weightService.getLastMeasurement();
     if (lastweightMesure) {
-      setWeight(lastweightMesure.weight);
+      setWeightInput(lastweightMesure.weight.toString());
     }
     setLoading(false);
   };
@@ -23,7 +23,7 @@ export default () => {
 
   const handleButtonClick = async () => {
     if (isAdding) {
-      await core.weightService.saveNewMeasurement(weight);
+      await core.weightService.saveNewMeasurement(+weightInput);
     }
     setIsAdding((isAdding) => !isAdding);
   };
@@ -31,18 +31,6 @@ export default () => {
   useEffect(() => {
     if (isAdding) inputRef.current?.focus();
   }, [isAdding]);
-
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const newWeight = +event.target.value;
-    if (newWeight > 300) {
-      return;
-    }
-    if (isNaN(newWeight)) {
-      setWeight(0);
-      return;
-    }
-    setWeight(newWeight);
-  };
 
   return (
     <div className="h-screen w-screen bg-black flex justify-center items-center">
@@ -56,15 +44,16 @@ export default () => {
                   aria-hidden="true"
                   className="text-6xl font-light text-white opacity-0 pl-3"
                 >
-                  {weight}
+                  {weightInput}
                 </span>
                 <input
                   ref={inputRef}
                   disabled={!isAdding}
                   type="number"
-                  value={weight.toString()}
-                  onChange={handleInputChange}
-                  className="absolute h-full w-full left-0 top-0 border-none outline-none text-white text-6xl font-light bg-transparent text-right appearance-none"
+                  inputMode="decimal"
+                  value={weightInput}
+                  onChange={(e) => setWeightInput(e.target.value)}
+                  className="absolute h-full w-full left-0 top-0 border-none outline-none text-white disabled:opacity-100 text-6xl font-light bg-transparent text-right appearance-none"
                 />
               </div>
               <span className="text-white">kg</span>
