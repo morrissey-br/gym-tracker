@@ -3,7 +3,7 @@ import { AuthProvider } from "../providers/AuthProvider";
 export interface AuthService {
   login(email: string, password: string): Promise<void>;
   logout(): Promise<void>;
-  isLoggedIn(): Promise<boolean>;
+  isLoggedIn(): boolean;
 }
 
 const authService = (authProvider: AuthProvider): AuthService => {

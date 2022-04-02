@@ -32,8 +32,18 @@ export default () => {
     if (isAdding) inputRef.current?.focus();
   }, [isAdding]);
 
+  const handleLogout = async () => {
+    await core.authService.logout();
+  };
+
   return (
     <div className="h-screen w-screen bg-black flex justify-center items-center">
+      <button
+        onClick={handleLogout}
+        className="absolute right-0 top-0 p-3 text-white"
+      >
+        Sair
+      </button>
       <div className="flex flex-col items-center min-w-[150px]">
         {!loading ? (
           <>

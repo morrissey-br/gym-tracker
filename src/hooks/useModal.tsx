@@ -41,7 +41,7 @@ const useModalContext = (): ModalContext => {
 
 const Context = createContext(defaultModalContext);
 
-export const ModalProvider = ({ children }: { children: ReactNode }) => {
+export const ModalProvider = ({ children }: { children: JSX.Element }) => {
   const modalContext = useModalContext();
   return <Context.Provider value={modalContext}>{children}</Context.Provider>;
 };
