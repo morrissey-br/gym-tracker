@@ -1,5 +1,5 @@
-import { WeightMesure } from "./WeightMesure";
-import { WeightMesureRepository } from "./WeightMesureRepository";
+import { WeightMesure } from "../models/WeightMesure";
+import { WeightMesureRepository } from "../db/WeightMesureRepository";
 
 export interface WeightService {
   saveNewMeasurement(weight: number): Promise<void>;

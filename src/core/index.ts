@@ -1,18 +1,16 @@
-import { AuthFirebase } from "./AuthFirebase";
-import authService, { AuthService } from "./AuthService";
-import { WeightMesureFirestoreRepo } from "./WeightMesureFirestoreRepo";
-import weightService, { WeightService } from "./WeightService";
+import { FirebaseAuthProvider } from "./providers/FirebaseAuthProvider";
+import authService, { AuthService } from "./services/AuthService";
+import { WeightMesureFirestoreRepo } from "./db/WeightMesureFirestoreRepo";
+import weightService, { WeightService } from "./services/WeightService";
 
-export interface Core {
+export interface CoreService {
   authService: AuthService;
   weightService: WeightService;
 }
 
-const core = (): Core => {
+export const FirebaseCoreService = (): CoreService => {
   return {
     weightService: weightService(WeightMesureFirestoreRepo()),
-    authService: authService(AuthFirebase()),
+    authService: authService(FirebaseAuthProvider()),
   };
 };
-
-export default core;

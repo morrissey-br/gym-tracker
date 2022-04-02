@@ -1,7 +1,7 @@
-import { Auth } from "./Auth";
+import { AuthProvider } from "./AuthProvider";
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
-export const AuthFirebase = (): Auth => {
+export const FirebaseAuthProvider = (): AuthProvider => {
   const auth = getAuth();
 
   const login = async (email: string, password: string): Promise<void> => {

@@ -1,4 +1,4 @@
-import { WeightMesure } from "./WeightMesure";
+import { WeightMesure } from "../models/WeightMesure";
 
 export interface WeightMesureRepository {
   getLast(): Promise<WeightMesure | null>;

@@ -9,8 +9,8 @@ import {
   query,
   setDoc,
 } from "firebase/firestore";
-import { WeightMesure } from "./WeightMesure";
-import { WeightMesureRepository } from "./WeightMesureRepository";
+import { WeightMesure } from "../models/WeightMesure";
+import { WeightMesureRepository } from "../db/WeightMesureRepository";
 
 export const WeightMesureFirestoreRepo = (): WeightMesureRepository => {
   const converter: FirestoreDataConverter<WeightMesure> = {

@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { WeightMesure } from "../../core/WeightMesure";
+import { WeightMesure } from "../../core/models/WeightMesure";
 import { useCore } from "../../hooks/useCore";
 export default () => {
   const core = useCore();
