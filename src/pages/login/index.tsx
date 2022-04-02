@@ -20,7 +20,7 @@ export default () => {
     <div className="h-screen bg-black flex justify-center items-center">
       <form
         onSubmit={handleSubmit}
-        className="bg-white w-96 p-6 pb-8 flex flex-col gap-2 rounded"
+        className="bg-white w-96 p-6 pb-8 flex flex-col gap-2 rounded-lg"
       >
         <h1 className="text-center text-2xl">Login</h1>
         <div className="flex flex-col gap-2">
@@ -30,7 +30,7 @@ export default () => {
             onChange={(e) => setEmail(e.target.value)}
             type="email"
             id="email"
-            className="border border-dark rounded p-2"
+            className="border rounded-lg p-2"
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -40,10 +40,15 @@ export default () => {
             onChange={(e) => setPassword(e.target.value)}
             type="password"
             id="password"
-            className="border border-dark rounded p-2"
+            className="border rounded-lg p-2"
           />
         </div>
-        <button type="submit">Entrar</button>
+        <button
+          type="submit"
+          className="mt-2 p-3 border rounded-lg hover:bg-black hover:text-white hover:transition-colors"
+        >
+          Entrar
+        </button>
       </form>
     </div>
   );
