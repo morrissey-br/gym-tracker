@@ -5,12 +5,14 @@ import {
   signOut,
   setPersistence,
   browserLocalPersistence,
+  User,
 } from "firebase/auth";
 
 export const FirebaseAuthProvider = (): AuthProvider => {
   const auth = getAuth();
-  auth.onAuthStateChanged(async (user) => {
-    console.log("auth state changed", user);
+  let user = auth.currentUser;
+  auth.onAuthStateChanged((newUser) => {
+    user = newUser;
   });
 
   const login = async (email: string, password: string): Promise<void> => {
@@ -22,8 +24,8 @@ export const FirebaseAuthProvider = (): AuthProvider => {
     await signOut(auth);
   };
 
-  const isLoggedIn = async (): Promise<boolean> => {
-    return auth.currentUser !== null;
+  const isLoggedIn = (): boolean => {
+    return !!user;
   };
 
   return {
