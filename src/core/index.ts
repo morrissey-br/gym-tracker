@@ -3,6 +3,7 @@ import DomainService from "./domain";
 import { FirebaseAuthProvider } from "./auth/providers/FirebaseAuthProvider";
 import { WeightMesureFirestoreRepository } from "./domain/db/firestore/WeightMesureFirestoreRepository";
 import { WeightMesureInMemoryRepository } from "./domain/db/inMemory/WeightMesureInMemoryRepository";
+import { MockAuthProvider } from "./auth/providers/MockAuthProvider";
 
 interface CoreService {
   auth: ReturnType<typeof AuthService>;
@@ -14,7 +15,7 @@ export default (): CoreService => {
   if (inDev) {
     console.info("CoreService: inDev");
     return {
-      auth: AuthService(FirebaseAuthProvider()),
+      auth: AuthService(MockAuthProvider()),
       domain: DomainService(WeightMesureInMemoryRepository()),
     };
   }
