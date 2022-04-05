@@ -8,25 +8,25 @@ const RequireAuth = ({ children }: { children: JSX.Element }): JSX.Element => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      const isLoggedIn = await core.authService.isLoggedIn();
-      setIsLoggedIn(isLoggedIn);
-      setIsLoading(false);
-    };
-    checkAuth();
-  }, [core]);
-
   // useEffect(() => {
-  //   core.authService.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       setIsLoggedIn(true);
-  //     } else {
-  //       setIsLoggedIn(false);
-  //     }
+  //   const checkAuth = async () => {
+  //     const isLoggedIn = await core.auth.isLoggedIn();
+  //     setIsLoggedIn(isLoggedIn);
   //     setIsLoading(false);
-  //   });
+  //   };
+  //   checkAuth();
   // }, [core]);
+
+  useEffect(() => {
+    core.auth.onAuthStateChanged((user) => {
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+      setIsLoading(false);
+    });
+  }, [core]);
 
   if (isLoading) {
     return <Loading />;
