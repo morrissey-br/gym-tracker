@@ -10,7 +10,7 @@ export default () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      await core.authService.login(email, password);
+      await core.auth.login(email, password);
       navigate("/dashboard");
     } catch (error) {
       console.log(error);

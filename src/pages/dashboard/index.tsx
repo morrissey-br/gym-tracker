@@ -1,5 +1,4 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { WeightMesure } from "../../core/models/WeightMesure";
+import { useEffect, useRef, useState } from "react";
 import { useCore } from "../../hooks/useCore";
 export default () => {
   const core = useCore();
@@ -10,7 +9,8 @@ export default () => {
 
   const fetchLastWeight = async () => {
     setLoading(true);
-    const lastweightMesure = await core.weightService.getLastMeasurement();
+    const lastweightMesure =
+      await core.domain.weightService.getLastMeasurement();
     if (lastweightMesure) {
       setWeightInput(lastweightMesure.weight.toString());
     }
@@ -23,7 +23,7 @@ export default () => {
 
   const handleButtonClick = async () => {
     if (isAdding) {
-      await core.weightService.saveNewMeasurement(+weightInput);
+      await core.domain.weightService.saveNewMeasurement(+weightInput);
     }
     setIsAdding((isAdding) => !isAdding);
   };
@@ -33,7 +33,7 @@ export default () => {
   }, [isAdding]);
 
   const handleLogout = async () => {
-    await core.authService.logout();
+    await core.auth.logout();
   };
 
   return (

@@ -7,12 +7,11 @@ import {
   limit,
   orderBy,
   query,
-  setDoc,
 } from "firebase/firestore";
-import { WeightMesure } from "../models/WeightMesure";
-import { WeightMesureRepository } from "../db/WeightMesureRepository";
+import { WeightMesure } from "../../models/WeightMesure";
+import { WeightMesureRepository } from "../../models/WeightMesureRepository";
 
-export const WeightMesureFirestoreRepo = (): WeightMesureRepository => {
+export const WeightMesureFirestoreRepository = (): WeightMesureRepository => {
   const converter: FirestoreDataConverter<WeightMesure> = {
     toFirestore: (data: WeightMesure): any => {
       return {

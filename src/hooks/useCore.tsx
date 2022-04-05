@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext } from "react";
-import { CoreService, FirebaseCoreService } from "../core";
+import CoreService from "../core";
 
-const defaultCoreContext: CoreService = FirebaseCoreService();
+const defaultCoreContext = CoreService();
 
 const Context = createContext(defaultCoreContext);
 

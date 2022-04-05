@@ -1,12 +1,12 @@
 import { WeightMesure } from "../models/WeightMesure";
-import { WeightMesureRepository } from "../db/WeightMesureRepository";
+import { WeightMesureRepository } from "../models/WeightMesureRepository";
 
-export interface WeightService {
+interface WeightService {
   saveNewMeasurement(weight: number): Promise<void>;
   getLastMeasurement(): Promise<WeightMesure | null>;
 }
 
-const weightService = (
+export default (
   weightMesureRepository: WeightMesureRepository
 ): WeightService => {
   const saveNewMeasurement = async (weight: number): Promise<void> => {
@@ -24,5 +24,3 @@ const weightService = (
     getLastMeasurement,
   };
 };
-
-export default weightService;

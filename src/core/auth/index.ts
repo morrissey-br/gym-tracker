@@ -1,13 +1,13 @@
-import { AuthProvider } from "../providers/AuthProvider";
+import { AuthProvider } from "./AuthProvider";
 
-export interface AuthService {
+interface AuthService {
   login(email: string, password: string): Promise<void>;
   logout(): Promise<void>;
   isLoggedIn(): Promise<boolean>;
   onAuthStateChanged(callback: (authState: boolean) => void): () => void;
 }
 
-const authService = (authProvider: AuthProvider): AuthService => {
+export default (authProvider: AuthProvider): AuthService => {
   return {
     login: (email, password) => authProvider.login(email, password),
     logout: () => authProvider.logout(),
@@ -15,5 +15,3 @@ const authService = (authProvider: AuthProvider): AuthService => {
     onAuthStateChanged: (callback) => authProvider.onAuthStateChanged(callback),
   };
 };
-
-export default authService;
