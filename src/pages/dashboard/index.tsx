@@ -37,7 +37,7 @@ export default () => {
   };
 
   return (
-    <div className="h-screen w-screen bg-black flex justify-center items-center">
+    <div className="h-full flex justify-center items-center">
       <button
         onClick={handleLogout}
         className="absolute right-0 top-0 p-3 text-white"

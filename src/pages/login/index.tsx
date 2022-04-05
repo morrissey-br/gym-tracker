@@ -17,7 +17,7 @@ export default () => {
     }
   };
   return (
-    <div className="h-screen bg-black flex justify-center items-center">
+    <div className="h-full flex justify-center items-center">
       <form
         onSubmit={handleSubmit}
         className="bg-white w-96 p-6 pb-8 flex flex-col gap-2 rounded-lg"

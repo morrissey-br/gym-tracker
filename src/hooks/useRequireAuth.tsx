@@ -8,17 +8,17 @@ const RequireAuth = ({ children }: { children: JSX.Element }): JSX.Element => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // useEffect(() => {
-  //   const checkAuth = async () => {
-  //     const isLoggedIn = await core.auth.isLoggedIn();
-  //     setIsLoggedIn(isLoggedIn);
-  //     setIsLoading(false);
-  //   };
-  //   checkAuth();
-  // }, [core]);
+  useEffect(() => {
+    const checkAuth = async () => {
+      const isLoggedIn = await core.auth.isLoggedIn();
+      setIsLoggedIn(isLoggedIn);
+      setIsLoading(false);
+    };
+    checkAuth();
+  }, [core]);
 
   useEffect(() => {
-    core.auth.onAuthStateChanged((user) => {
+    const unsubscribe = core.auth.onAuthStateChanged((user) => {
       if (user) {
         setIsLoggedIn(true);
       } else {
@@ -26,13 +26,18 @@ const RequireAuth = ({ children }: { children: JSX.Element }): JSX.Element => {
       }
       setIsLoading(false);
     });
+    return unsubscribe;
   }, [core]);
 
   if (isLoading) {
     return <Loading />;
-  } else {
-    return isLoggedIn ? children : <Navigate to={"/"} replace />;
   }
+
+  if (!isLoggedIn) {
+    return <Navigate to="/" />;
+  }
+
+  return children;
 };
 
 export const useRequireAuth = () => {

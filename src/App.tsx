@@ -9,7 +9,7 @@ export default () => {
   const modal = useModal();
   const RequireAuth = useRequireAuth();
   return (
-    <>
+    <div className="bg-black h-screen">
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
@@ -22,6 +22,6 @@ export default () => {
         />
       </Routes>
       {modal.isOpen && <ModalPortal />}
-    </>
+    </div>
   );
 };
