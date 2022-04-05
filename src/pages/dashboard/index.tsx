@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useCore } from "../../hooks/useCore";
+import Loading from "../loading";
 export default () => {
   const core = useCore();
   const [isAdding, setIsAdding] = useState(false);
-  const [weightInput, setWeightInput] = useState("");
+  const [weight, setWeight] = useState(0);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -12,7 +13,7 @@ export default () => {
     const lastweightMesure =
       await core.domain.weightService.getLastMeasurement();
     if (lastweightMesure) {
-      setWeightInput(lastweightMesure.weight.toString());
+      setWeight(lastweightMesure.weight);
     }
     setLoading(false);
   };
@@ -23,7 +24,7 @@ export default () => {
 
   const handleButtonClick = async () => {
     if (isAdding) {
-      await core.domain.weightService.saveNewMeasurement(+weightInput);
+      await core.domain.weightService.saveNewMeasurement(weight);
     }
     setIsAdding((isAdding) => !isAdding);
   };
@@ -54,15 +55,15 @@ export default () => {
                   aria-hidden="true"
                   className="text-6xl font-light text-white opacity-0 pl-3"
                 >
-                  {weightInput}
+                  {weight.toString()}
                 </span>
                 <input
                   ref={inputRef}
                   disabled={!isAdding}
                   type="number"
                   inputMode="decimal"
-                  value={weightInput}
-                  onChange={(e) => setWeightInput(e.target.value)}
+                  value={weight.toString()}
+                  onChange={(e) => setWeight(+e.target.value)}
                   className="absolute h-full w-full left-0 top-0 border-none outline-none text-white disabled:opacity-100 text-6xl font-light bg-transparent text-right appearance-none"
                 />
               </div>
@@ -76,9 +77,7 @@ export default () => {
             </button>
           </>
         ) : (
-          <div className="flex items-center justify-center">
-            <span>Carregando...</span>
-          </div>
+          <Loading />
         )}
       </div>
     </div>
