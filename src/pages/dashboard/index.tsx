@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import { Loading } from "../../components/Loading";
 import { useCore } from "../../hooks/useCore";
-import Loading from "../loading";
 export default () => {
   const core = useCore();
   const [isAdding, setIsAdding] = useState(false);
-  const [weight, setWeight] = useState(0);
+  const [weightInput, setWeightInput] = useState("0");
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -13,7 +13,7 @@ export default () => {
     const lastweightMesure =
       await core.domain.weightService.getLastMeasurement();
     if (lastweightMesure) {
-      setWeight(lastweightMesure.weight);
+      setWeightInput(lastweightMesure.weight.toString());
     }
     setLoading(false);
   };
@@ -24,7 +24,7 @@ export default () => {
 
   const handleButtonClick = async () => {
     if (isAdding) {
-      await core.domain.weightService.saveNewMeasurement(weight);
+      await core.domain.weightService.saveNewMeasurement(+weightInput);
     }
     setIsAdding((isAdding) => !isAdding);
   };
@@ -55,15 +55,15 @@ export default () => {
                   aria-hidden="true"
                   className="text-6xl font-light text-white opacity-0 pl-3"
                 >
-                  {weight.toString()}
+                  {weightInput === "" ? "0" : weightInput}
                 </span>
                 <input
                   ref={inputRef}
                   disabled={!isAdding}
                   type="number"
                   inputMode="decimal"
-                  value={weight.toString()}
-                  onChange={(e) => setWeight(+e.target.value)}
+                  value={weightInput}
+                  onChange={(e) => setWeightInput(e.target.value)}
                   className="absolute h-full w-full left-0 top-0 border-none outline-none text-white disabled:opacity-100 text-6xl font-light bg-transparent text-right appearance-none"
                 />
               </div>
