@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, FocusEvent } from "react";
+import { Link } from "react-router-dom";
 import { Loading } from "../../components/Loading";
 import { useCore } from "../../hooks/useCore";
 export default () => {
@@ -24,7 +25,10 @@ export default () => {
 
   const handleButtonClick = async () => {
     if (isAdding) {
+      setLoading(true);
       await core.domain.weightService.saveNewMeasurement(+weightInput);
+      await fetchLastWeight();
+      setLoading(false);
     }
     setIsAdding((isAdding) => !isAdding);
   };
@@ -37,8 +41,14 @@ export default () => {
     await core.auth.logout();
   };
 
+  const handleInputBlur = (e: FocusEvent<HTMLDivElement>) => {
+    if (e.relatedTarget === null) {
+      setIsAdding(false);
+    }
+  };
+
   return (
-    <div className="h-full flex justify-center items-center">
+    <div className="h-full flex justify-center items-center ">
       <button
         onClick={handleLogout}
         className="absolute right-0 top-0 p-3 text-white"
@@ -64,6 +74,7 @@ export default () => {
                   inputMode="decimal"
                   value={weightInput}
                   onChange={(e) => setWeightInput(e.target.value)}
+                  onBlur={handleInputBlur}
                   className="absolute h-full w-full left-0 top-0 border-none outline-none text-white disabled:opacity-100 text-6xl font-light bg-transparent text-right appearance-none"
                 />
               </div>
@@ -80,6 +91,12 @@ export default () => {
           <Loading />
         )}
       </div>
+      <Link
+        to="details"
+        className="absolute bottom-0 text-white m-auto my-4 hover:underline "
+      >
+        Ver mais
+      </Link>
     </div>
   );
 };

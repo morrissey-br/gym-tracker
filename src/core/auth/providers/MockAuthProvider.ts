@@ -1,7 +1,7 @@
 import { AuthProvider } from "../AuthProvider";
 
 export const MockAuthProvider = (): AuthProvider => {
-  let authState = false;
+  let authState = true;
   let authStateChangedCallbacks: ((authState: boolean) => void)[] = [];
 
   const login = async (email: string, password: string): Promise<void> => {
