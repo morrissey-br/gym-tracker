@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router";
-import Loading from "../pages/loading";
+import { Loading } from "../components/Loading";
 import { useCore } from "./useCore";
 
 const RequireAuth = ({ children }: { children: JSX.Element }): JSX.Element => {
