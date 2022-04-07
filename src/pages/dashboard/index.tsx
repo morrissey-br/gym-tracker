@@ -11,10 +11,10 @@ export default () => {
 
   const fetchLastWeight = async () => {
     setLoading(true);
-    const lastweightMesure =
+    const lastWeightMeasurement =
       await core.domain.weightService.getLastMeasurement();
-    if (lastweightMesure) {
-      setWeightInput(lastweightMesure.weight.toString());
+    if (lastWeightMeasurement) {
+      setWeightInput(lastWeightMeasurement.weight.toString());
     }
     setLoading(false);
   };

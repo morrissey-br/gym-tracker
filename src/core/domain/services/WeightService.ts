@@ -1,26 +1,35 @@
-import { WeightMesure } from "../models/WeightMesure";
-import { WeightMesureRepository } from "../models/WeightMesureRepository";
+import { WeightMeasurement } from "../models/WeightMeasurement";
+import { WeightMeasurementRepository } from "../models/WeightMeasurementRepository";
 
 interface WeightService {
   saveNewMeasurement(weight: number): Promise<void>;
-  getLastMeasurement(): Promise<WeightMesure | null>;
+  getLastMeasurement(): Promise<WeightMeasurement | null>;
+  getAllMeasurements(limit: number, page: number): Promise<WeightMeasurement[]>;
 }
 
 export default (
-  weightMesureRepository: WeightMesureRepository
+  WeightMeasurementRepository: WeightMeasurementRepository
 ): WeightService => {
   const saveNewMeasurement = async (weight: number): Promise<void> => {
-    const weightMesure: WeightMesure = {
+    const WeightMeasurement: WeightMeasurement = {
       date: new Date(),
       weight: weight,
     };
-    await weightMesureRepository.save(weightMesure);
+    await WeightMeasurementRepository.save(WeightMeasurement);
   };
-  const getLastMeasurement = async (): Promise<WeightMesure | null> => {
-    return weightMesureRepository.getLast();
+  const getLastMeasurement = async (): Promise<WeightMeasurement | null> => {
+    return WeightMeasurementRepository.getLast();
+  };
+
+  const getAllMeasurements = async (
+    limit: number,
+    page: number
+  ): Promise<WeightMeasurement[]> => {
+    return WeightMeasurementRepository.getAll(limit, page);
   };
   return {
     saveNewMeasurement,
     getLastMeasurement,
+    getAllMeasurements,
   };
 };

@@ -20,7 +20,7 @@ export default () => {
     <div className="h-full flex justify-center items-center">
       <form
         onSubmit={handleSubmit}
-        className="bg-white w-96 p-6 pb-8 flex flex-col gap-2 rounded-lg"
+        className="bg-white text-black w-80 p-6 pb-8 flex flex-col gap-2 rounded-lg"
       >
         <h1 className="text-center text-2xl">Login</h1>
         <div className="flex flex-col gap-2">
