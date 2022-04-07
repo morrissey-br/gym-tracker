@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/login";
-import Dashboard from "./pages/dashboard";
-import DashboardDetails from "./pages/dashboard/details";
+import WeightMeasurement from "./pages/dashboard/weight-measurement";
+import WeightMeasurementDetails from "./pages/dashboard/weight-measurement/details";
 import { useModal } from "./hooks/useModal";
 import { ModalPortal } from "./components/Modal/ModalPortal";
 import { useRequireAuth } from "./hooks/useRequireAuth";
+import Dashboard from "./pages/dashboard";
 
 export default () => {
   const modal = useModal();
@@ -13,22 +14,11 @@ export default () => {
     <div className="h-screen bg-black text-white">
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="dashboard">
+        <Route path="dashboard" element={<Dashboard />}>
+          <Route index element={<WeightMeasurement />} />
           <Route
-            index
-            element={
-              <RequireAuth>
-                <Dashboard />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="details"
-            element={
-              <RequireAuth>
-                <DashboardDetails />
-              </RequireAuth>
-            }
+            path="weight-measurement-details"
+            element={<WeightMeasurementDetails />}
           />
         </Route>
       </Routes>
