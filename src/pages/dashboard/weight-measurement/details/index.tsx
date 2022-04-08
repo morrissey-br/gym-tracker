@@ -14,6 +14,7 @@ export default () => {
     setLoading(true);
     const weightMeasurements =
       await core.domain.weightService.getAllMeasurements(limit, page);
+    console.log(weightMeasurements);
     if (weightMeasurements) setWeightMeasurements(weightMeasurements);
     setLoading(false);
   };
@@ -39,14 +40,14 @@ export default () => {
           <thead>
             <tr>
               <th className="text-left border border-light p-2">Data</th>
-              <th className="text-left border border-light p-2">Weight</th>
+              <th className="text-left border border-light p-2">Peso</th>
             </tr>
           </thead>
           <tbody>
             {weightMeasurements.map((weightMeasurement) => (
               <tr key={weightMeasurement.date.toString()}>
                 <td className="text-left border border-light p-2">
-                  {moment(weightMeasurement.date).format("LLL")}
+                  {moment(weightMeasurement.date).format("L")}
                 </td>
                 <td className="text-left border border-light p-2">
                   {weightMeasurement.weight.toFixed(2) + "kg"}

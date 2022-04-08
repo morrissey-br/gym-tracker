@@ -3,7 +3,10 @@ import { WeightMeasurementRepository } from "../../models/WeightMeasurementRepos
 
 export const WeightMeasurementInMemoryRepository =
   (): WeightMeasurementRepository => {
-    const WeightMeasurements: WeightMeasurement[] = [];
+    const WeightMeasurements: WeightMeasurement[] = [
+      { weight: 80, date: new Date(2022, 3, 1) },
+      { weight: 85, date: new Date(2022, 3, 2) },
+    ];
     const getLast = async (): Promise<WeightMeasurement | null> => {
       WeightMeasurements.sort((a, b) => a.date.getTime() - b.date.getTime());
       return WeightMeasurements.length > 0 ? WeightMeasurements[0] : null;
@@ -18,7 +21,7 @@ export const WeightMeasurementInMemoryRepository =
       page: number
     ): Promise<WeightMeasurement[]> => {
       WeightMeasurements.sort((a, b) => a.date.getTime() - b.date.getTime());
-      return WeightMeasurements.slice(page * limit, (page + 1) * limit);
+      return WeightMeasurements.slice((page - 1) * limit, page * limit);
     };
 
     return {

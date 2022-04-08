@@ -1,4 +1,4 @@
-import { FaChevronCircleLeft } from "react-icons/fa";
+import { FaChevronLeft } from "react-icons/fa";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useCore } from "../../hooks/useCore";
 
@@ -16,9 +16,9 @@ export default () => {
 
   return (
     <>
-      <header className="flex justify-between p-3">
+      <header className="absolute top-0 w-full flex justify-between p-3">
         <button onClick={handleNavigateBack}>
-          <FaChevronCircleLeft />
+          <FaChevronLeft />
         </button>
         <button onClick={handleLogout}>Sair</button>
       </header>
