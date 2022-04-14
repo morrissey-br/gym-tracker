@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import { WeightMeasurement } from "../../../../core/domain/models/WeightMeasurement";
 import { useCore } from "../../../../hooks/useCore";
+import { FaTrash } from "react-icons/fa";
 
 export default () => {
   const core = useCore();
@@ -19,21 +20,21 @@ export default () => {
     setLoading(false);
   };
 
+  const handleRemoveWeightMeasurement = async (
+    weightMeasurement: WeightMeasurement
+  ) => {
+    await core.domain.weightService.removeMeasurement(weightMeasurement.id);
+    setWeightMeasurements((weightMeasurements) =>
+      weightMeasurements.filter((w) => w.id !== weightMeasurement.id)
+    );
+  };
+
   useEffect(() => {
     fetchWeightMeasurements(10, 1);
   }, []);
 
-  const handleLogout = async () => {
-    await core.auth.logout();
-  };
   return (
     <div className="h-full flex flex-col justify-center items-center">
-      <button
-        onClick={handleLogout}
-        className="absolute right-0 top-0 p-3 text-white"
-      >
-        Sair
-      </button>
       <h1 className="p-4 text-2xl">Medidas anteriores</h1>
       {weightMeasurements.length > 0 ? (
         <table className="w-80 border-collapse">
@@ -41,6 +42,7 @@ export default () => {
             <tr>
               <th className="text-left border border-light p-2">Data</th>
               <th className="text-left border border-light p-2">Peso</th>
+              <th className="text-left border border-light p-2">Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -51,6 +53,16 @@ export default () => {
                 </td>
                 <td className="text-left border border-light p-2">
                   {weightMeasurement.weight.toFixed(2) + "kg"}
+                </td>
+                <td className="text-left border border-light p-2">
+                  <button
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={() =>
+                      handleRemoveWeightMeasurement(weightMeasurement)
+                    }
+                  >
+                    <FaTrash />
+                  </button>
                 </td>
               </tr>
             ))}

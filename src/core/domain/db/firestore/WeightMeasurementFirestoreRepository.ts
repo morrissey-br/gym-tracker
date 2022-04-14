@@ -1,12 +1,14 @@
 import {
   addDoc,
   collection,
+  doc,
   FirestoreDataConverter,
   getDocs,
   getFirestore,
   limit,
   orderBy,
   query,
+  setDoc,
   startAt,
 } from "firebase/firestore";
 import { WeightMeasurement } from "../../models/WeightMeasurement";
@@ -23,6 +25,7 @@ export const WeightMeasurementFirestoreRepository =
       },
       fromFirestore: (snapshot: any): WeightMeasurement => {
         return {
+          id: snapshot.id,
           date: new Date(snapshot.data().date),
           weight: snapshot.data().weight,
         };
@@ -33,6 +36,10 @@ export const WeightMeasurementFirestoreRepository =
       firestore,
       "WeightMeasurements"
     ).withConverter(converter);
+
+    const newId = (): string => {
+      return doc(firestore, "WeightMeasurements").id;
+    };
 
     const getLast = async (): Promise<WeightMeasurement | null> => {
       const q = query(
@@ -68,6 +75,7 @@ export const WeightMeasurementFirestoreRepository =
     };
 
     return {
+      newId,
       getLast,
       save,
       getAll,
