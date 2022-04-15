@@ -1,21 +1,24 @@
 {
-  "name": "react-template",
+  "name": "gymmm",
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --host",
+    "dev": "yarn && vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@types/uuid": "^8.3.4",
     "firebase": "^9.6.6",
+    "moment": "^2.29.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-router-dom": "6",
-    "recharts": "^2.1.9"
+    "recharts": "^2.1.9",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.17.2",

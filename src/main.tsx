@@ -1,4 +1,5 @@
 import "./config/firebase";
+import "./config/moment";
 import "./index.css";
 import React from "react";
 import ReactDOM from "react-dom";

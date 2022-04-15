@@ -1,4 +1,4 @@
-import { WeightMesureRepository } from "./models/WeightMesureRepository";
+import { WeightMeasurementRepository } from "./models/WeightMeasurementRepository";
 import WeightService from "./services/WeightService";
 
 interface CoreService {
@@ -6,9 +6,9 @@ interface CoreService {
 }
 
 export default (
-  weightMesureRepository: WeightMesureRepository
+  WeightMeasurementRepository: WeightMeasurementRepository
 ): CoreService => {
-  const weightService = WeightService(weightMesureRepository);
+  const weightService = WeightService(WeightMeasurementRepository);
   return {
     weightService,
   };
