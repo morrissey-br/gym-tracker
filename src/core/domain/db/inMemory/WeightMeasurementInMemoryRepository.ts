@@ -18,9 +18,7 @@ export const WeightMeasurementInMemoryRepository =
       WeightMeasurements.sort((a, b) => a.date.getTime() - b.date.getTime());
       return WeightMeasurements.length > 0 ? WeightMeasurements[0] : null;
     };
-    const save = async (
-      WeightMeasurement: WeightMeasurement
-    ): Promise<void> => {
+    const add = async (WeightMeasurement: WeightMeasurement): Promise<void> => {
       WeightMeasurements.push(WeightMeasurement);
     };
     const getAll = async (
@@ -42,7 +40,7 @@ export const WeightMeasurementInMemoryRepository =
     return {
       newId,
       getLast,
-      save,
+      add,
       getAll,
       remove,
     };

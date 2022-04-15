@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   FirestoreDataConverter,
   getDocs,
@@ -11,7 +12,10 @@ import {
   setDoc,
   startAt,
 } from "firebase/firestore";
-import { WeightMeasurement } from "../../models/WeightMeasurement";
+import {
+  WeightMeasurement,
+  WeightMeasurementId,
+} from "../../models/WeightMeasurement";
 import { WeightMeasurementRepository } from "../../models/WeightMeasurementRepository";
 
 export const WeightMeasurementFirestoreRepository =
@@ -54,9 +58,7 @@ export const WeightMeasurementFirestoreRepository =
       return querySnapshot.docs[0].data();
     };
 
-    const save = async (
-      WeightMeasurement: WeightMeasurement
-    ): Promise<void> => {
+    const add = async (WeightMeasurement: WeightMeasurement): Promise<void> => {
       await addDoc(WeightMeasurementCollection, WeightMeasurement);
     };
 
@@ -73,11 +75,15 @@ export const WeightMeasurementFirestoreRepository =
       const querySnapshot = await getDocs(q);
       return querySnapshot.docs.map((doc) => doc.data());
     };
+    const remove = async (id: WeightMeasurementId): Promise<void> => {
+      await deleteDoc(doc(WeightMeasurementCollection, id));
+    };
 
     return {
       newId,
       getLast,
-      save,
+      add,
       getAll,
+      remove,
     };
   };

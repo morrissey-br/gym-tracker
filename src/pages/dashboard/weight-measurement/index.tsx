@@ -26,7 +26,7 @@ export default () => {
   const handleButtonClick = async () => {
     if (isAdding) {
       setLoading(true);
-      await core.domain.weightService.saveNewMeasurement(+weightInput);
+      await core.domain.weightService.addNewMeasurement(+weightInput);
       await fetchLastWeight();
       setLoading(false);
     }
