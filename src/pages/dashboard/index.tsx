@@ -1,9 +1,11 @@
 import { FaChevronLeft } from "react-icons/fa";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useCore } from "../../hooks/useCore";
+import { useRequireAuth } from "../../hooks/useRequireAuth";
 
 export default () => {
   const { auth } = useCore();
+  const RequireAuth = useRequireAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -15,14 +17,18 @@ export default () => {
   };
 
   return (
-    <>
-      <header className="absolute top-0 w-full flex justify-between p-3">
-        <button onClick={handleNavigateBack}>
-          <FaChevronLeft />
-        </button>
-        <button onClick={handleLogout}>Sair</button>
-      </header>
-      <Outlet />
-    </>
+    <RequireAuth>
+      <div className="h-full flex flex-col">
+        <header className="h-12 w-full flex justify-between p-3">
+          <button onClick={handleNavigateBack}>
+            <FaChevronLeft />
+          </button>
+          <button onClick={handleLogout}>Sair</button>
+        </header>
+        <main className="flex-1 overflow-scroll pb-4">
+          <Outlet />
+        </main>
+      </div>
+    </RequireAuth>
   );
 };

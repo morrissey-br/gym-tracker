@@ -11,7 +11,7 @@ export default () => {
   const modal = useModal();
   const RequireAuth = useRequireAuth();
   return (
-    <div className="h-screen bg-black text-white">
+    <div className="h-screen">
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="dashboard" element={<Dashboard />}>

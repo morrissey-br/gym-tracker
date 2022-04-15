@@ -53,7 +53,7 @@ export default () => {
               <div className="relative flex">
                 <span
                   aria-hidden="true"
-                  className="text-6xl font-light text-white opacity-0 pl-3"
+                  className="text-6xl font-light opacity-0 pl-3"
                 >
                   {weightInput === "" ? "0" : weightInput}
                 </span>
@@ -65,13 +65,17 @@ export default () => {
                   value={weightInput}
                   onChange={(e) => setWeightInput(e.target.value)}
                   onBlur={handleInputBlur}
-                  className="absolute h-full w-full left-0 top-0 border-none outline-none text-white disabled:opacity-100 text-6xl font-light bg-transparent text-right appearance-none"
+                  className="absolute h-full w-full left-0 top-0 border-none outline-none disabled:opacity-100 text-6xl font-light bg-transparent text-right appearance-none"
                 />
               </div>
-              <span className="text-white">kg</span>
+              <span>kg</span>
             </div>
             <button
-              className="mt-3 p-2 w-full border border-white text-white rounded-lg hover:bg-white hover:text-black hover:transition-colors"
+              className={`mt-3 p-2 w-full border border-white rounded-lg transition-colors ${
+                isAdding
+                  ? "bg-white text-black"
+                  : "hover:bg-white hover:text-black"
+              }`}
               onClick={handleButtonClick}
             >
               {isAdding ? "Salvar" : "Adicionar"}
@@ -83,7 +87,7 @@ export default () => {
       </div>
       <Link
         to="weight-measurement-details"
-        className="absolute bottom-0 text-white m-auto my-4 hover:underline "
+        className="absolute bottom-0 m-auto my-4 hover:underline "
       >
         Ver mais
       </Link>
