@@ -11,7 +11,7 @@ export default () => {
     e.preventDefault();
     try {
       await core.auth.login(email, password);
-      navigate("/dashboard");
+      navigate("/weight");
     } catch (error) {
       console.log(error);
     }
