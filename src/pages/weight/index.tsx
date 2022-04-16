@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, FocusEvent } from "react";
 import { Link } from "react-router-dom";
-import { Loading } from "../../../components/Loading";
-import { useCore } from "../../../hooks/useCore";
+import { Loading } from "../../components/Loading";
+import { useCore } from "../../hooks/useCore";
+
 export default () => {
   const core = useCore();
   const [isAdding, setIsAdding] = useState(false);
@@ -86,7 +87,7 @@ export default () => {
         )}
       </div>
       <Link
-        to="weight-measurement-details"
+        to="details"
         className="absolute bottom-0 m-auto my-4 hover:underline "
       >
         Ver mais

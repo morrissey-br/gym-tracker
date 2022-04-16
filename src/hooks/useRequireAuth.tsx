@@ -34,7 +34,7 @@ const RequireAuth = ({ children }: { children: JSX.Element }): JSX.Element => {
   }
 
   if (!isLoggedIn) {
-    return <Navigate to="/" />;
+    return <Navigate to="/" replace />;
   }
 
   return children;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import moment from "moment";
-import { WeightMeasurement } from "../../../../core/domain/models/WeightMeasurement";
-import { useCore } from "../../../../hooks/useCore";
+import { WeightMeasurement } from "../../../core/domain/models/WeightMeasurement";
+import { useCore } from "../../../hooks/useCore";
 import { FaTrash } from "react-icons/fa";
 
 export default () => {
