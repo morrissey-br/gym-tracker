@@ -30,7 +30,7 @@ export default () => {
 
           <button onClick={handleLogout}>Sair</button>
         </header>
-        <main className="flex-1 overflow-auto pb-4">
+        <main className="flex-1 overflow-auto py-4">
           <Outlet />
         </main>
       </div>
