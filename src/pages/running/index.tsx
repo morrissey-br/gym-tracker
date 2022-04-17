@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaArrowUp } from "react-icons/fa";
+import { Button } from "../../components/Button";
 import { Display } from "../../components/Display";
 
 export default () => {
@@ -13,14 +14,9 @@ export default () => {
         <Display label="Tempo" value="24:00" unit="min" />
         <Display label="Ritmo" value="6:21" unit="min/km" />
       </div>
-      <button
-        className={`mt-3 p-2 w-full border border-white rounded-lg transition-colors ${
-          isAdding ? "bg-white text-black" : "hover:bg-white hover:text-black"
-        }`}
-        onClick={handleButtonClick}
-      >
+      <Button active={isAdding} onClick={handleButtonClick}>
         {isAdding ? "Salvar" : "Adicionar"}
-      </button>
+      </Button>
       <span className="text-xl">Resumo da semana</span>
       <div className="flex justify-between gap-2">
         <Display label="Distância total" value="43.00" unit="km" noBorder />

@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, FocusEvent } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "../../components/Button";
 import { Loading } from "../../components/Loading";
+import { AutoGrowInput } from "../../components/Modal/AutoGrowInput";
 import { useCore } from "../../hooks/useCore";
 
 export default () => {
@@ -50,37 +52,17 @@ export default () => {
         {!loading ? (
           <>
             <span className="text-xl text-white">Peso Atual</span>
-            <div className="flex items-end pr-3">
-              <div className="relative flex">
-                <span
-                  aria-hidden="true"
-                  className="text-6xl font-light opacity-0 pl-3"
-                >
-                  {weightInput === "" ? "0" : weightInput}
-                </span>
-                <input
-                  ref={inputRef}
-                  disabled={!isAdding}
-                  type="number"
-                  inputMode="decimal"
-                  value={weightInput}
-                  onChange={(e) => setWeightInput(e.target.value)}
-                  onBlur={handleInputBlur}
-                  className="absolute h-full w-full left-0 top-0 border-none outline-none disabled:opacity-100 text-6xl font-light bg-transparent text-right appearance-none"
-                />
-              </div>
-              <span>kg</span>
-            </div>
-            <button
-              className={`mt-3 p-2 w-full border border-white rounded-lg transition-colors ${
-                isAdding
-                  ? "bg-white text-black"
-                  : "hover:bg-white hover:text-black"
-              }`}
-              onClick={handleButtonClick}
-            >
+            <AutoGrowInput
+              value={weightInput}
+              onChange={(event) => setWeightInput(event.target.value)}
+              onBlur={handleInputBlur}
+              ref={inputRef}
+              unit="kg"
+              disabled={!isAdding}
+            />
+            <Button active={isAdding} onClick={handleButtonClick}>
               {isAdding ? "Salvar" : "Adicionar"}
-            </button>
+            </Button>
           </>
         ) : (
           <Loading />
