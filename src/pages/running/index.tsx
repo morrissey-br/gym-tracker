@@ -26,15 +26,16 @@ export default () => {
             percentage={-1}
           />
         </div>
-        <Button active={isAdding} onClick={handleButtonClick}>
-          {isAdding ? "Salvar" : "Adicionar"}
-        </Button>
+
         <span className="text-xl">Última corrida</span>
         <div className="flex justify-between gap-2">
           <Display label="Distância total" value="43.00" unit="km" noBorder />
           <Display label="Ritmo médio" value="6:10" unit="min/km" noBorder />
           <Display label="Ritmo médio" value="7:34" unit="min/km" noBorder />
         </div>
+        <Button active={isAdding} onClick={handleButtonClick}>
+          {isAdding ? "Salvar" : "Adicionar"}
+        </Button>
       </div>
     </div>
   );
