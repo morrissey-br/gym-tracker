@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, FocusEvent } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../../components/Button";
 import { Loading } from "../../components/Loading";
-import { AutoGrowInput } from "../../components/Modal/AutoGrowInput";
+import { AutoGrowInput } from "../../components/AutoGrowInput";
 import { useCore } from "../../hooks/useCore";
 
 export default () => {

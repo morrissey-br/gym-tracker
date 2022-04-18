@@ -28,7 +28,11 @@ export const Display = ({
       </div>
       <div className="flex justify-center items-center text-danger">
         {percentage && Number(percentage.toFixed(2)) !== 0 && (
-          <div className="flex justify-center items-center text-success">
+          <div
+            className={`flex justify-center items-center ${
+              percentage > 0 ? "text-success" : "text-danger"
+            }`}
+          >
             {percentage > 0 && <FaArrowUp />}
             {percentage < 0 && <FaArrowDown />}
             <span>{percentage.toFixed(0)}%</span>
