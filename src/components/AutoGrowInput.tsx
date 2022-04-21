@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes } from "react";
+import React, { HTMLInputTypeAttribute, InputHTMLAttributes } from "react";
 
 type Props = {
   unit?: string;
@@ -16,8 +16,6 @@ export const AutoGrowInput = React.forwardRef<
         </span>
         <input
           ref={ref}
-          type="number"
-          inputMode="decimal"
           className="absolute h-full w-full left-0 top-0 border-none outline-none disabled:opacity-100 text-6xl font-light bg-transparent text-right appearance-none"
           {...props}
         />

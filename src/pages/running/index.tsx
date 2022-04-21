@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { Button } from "../../components/Button";
 import { Display } from "../../components/Display";
+import { EditDisplay } from "../../components/EditDisplay";
+import { TimeEditDisplay } from "../../components/TimeEditDisplay";
 
 export default () => {
   const [isAdding, setIsAdding] = useState(false);
+  const [distanceInput, setDistanceInput] = useState("0");
+  const [timeInput, setTimeInput] = useState("0");
+
   const handleButtonClick = () => {
     setIsAdding((isAdding) => !isAdding);
   };
@@ -29,9 +34,22 @@ export default () => {
 
         <span className="text-xl">Última corrida</span>
         <div className="flex justify-between gap-2">
-          <Display label="Distância total" value="43.00" unit="km" noBorder />
-          <Display label="Ritmo médio" value="6:10" unit="min/km" noBorder />
-          <Display label="Ritmo médio" value="7:34" unit="min/km" noBorder />
+          <EditDisplay
+            label="Distância"
+            type="number"
+            value={distanceInput}
+            unit="km"
+            noBorder
+            disabled={!isAdding}
+            onChange={setDistanceInput}
+          />
+          <TimeEditDisplay
+            label="Tempo"
+            value={timeInput}
+            noBorder
+            disabled={!isAdding}
+            onChange={setTimeInput}
+          />
         </div>
         <Button active={isAdding} onClick={handleButtonClick}>
           {isAdding ? "Salvar" : "Adicionar"}

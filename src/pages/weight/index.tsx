@@ -54,6 +54,7 @@ export default () => {
             <span className="text-xl text-white">Peso Atual</span>
             <AutoGrowInput
               value={weightInput}
+              type="number"
               onChange={(event) => setWeightInput(event.target.value)}
               onBlur={handleInputBlur}
               ref={inputRef}
