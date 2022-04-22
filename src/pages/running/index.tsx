@@ -2,12 +2,16 @@ import { useState } from "react";
 import { Button } from "../../components/Button";
 import { Display } from "../../components/Display";
 import { EditDisplay } from "../../components/EditDisplay";
-import { TimeEditDisplay } from "../../components/TimeEditDisplay";
+import { Time, TimeEditDisplay } from "../../components/TimeEditDisplay";
 
 export default () => {
   const [isAdding, setIsAdding] = useState(false);
   const [distanceInput, setDistanceInput] = useState("0");
-  const [timeInput, setTimeInput] = useState("0");
+  const [timeInput, setTimeInput] = useState<Time>({
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   const handleButtonClick = () => {
     setIsAdding((isAdding) => !isAdding);

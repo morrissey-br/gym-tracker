@@ -2,13 +2,19 @@ import { useEffect, useState } from "react";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 import { AutoGrowInput } from "./AutoGrowInput";
 
+export type Time = {
+  hours: number;
+  minutes: number;
+  seconds: number;
+};
+
 type Props = {
   label: string;
-  value: string;
+  value: Time;
   percentage?: number;
   noBorder?: boolean;
   disabled?: boolean;
-  onChange: (value: string) => void;
+  onChange: (value: Time) => void;
 };
 
 export const TimeEditDisplay = ({
@@ -19,12 +25,15 @@ export const TimeEditDisplay = ({
   disabled,
   onChange,
 }: Props) => {
+  const [hours, setHours] = useState("00");
   const [minutes, setMinutes] = useState("00");
   const [seconds, setSeconds] = useState("00");
 
   useEffect(() => {
-    onChange(`${minutes}:${seconds}`);
-  }, [minutes, seconds]);
+    setHours(value.hours.toString().padStart(2, "0"));
+    setMinutes(value.minutes.toString().padStart(2, "0"));
+    setSeconds(value.seconds.toString().padStart(2, "0"));
+  }, [hours, minutes, seconds]);
 
   return (
     <div
@@ -33,18 +42,59 @@ export const TimeEditDisplay = ({
       }`}
     >
       <span>{label}</span>
-      <div className="flex justify-center items-center">
-        <AutoGrowInput
-          type="number"
-          value={minutes}
-          onChange={(event) => setMinutes(event.target.value)}
-        />
-        <span className="text-6xl font-light bg-transparent text-right">:</span>
-        <AutoGrowInput
-          type="number"
-          value={minutes}
-          onChange={(event) => setMinutes(event.target.value)}
-        />
+      <div className="flex justify-center items-top">
+        <div className="relative flex">
+          <span aria-hidden="true" className="text-6xl font-light opacity-0">
+            {"00"}
+          </span>
+          <input
+            type="number"
+            inputMode="numeric"
+            value={hours}
+            onChange={(event) => setHours(event.target.value)}
+            disabled={disabled}
+            max={59}
+            min={0}
+            step={1}
+            className="absolute h-full w-full left-0 top-0 border-none outline-none disabled:opacity-100 text-6xl font-light bg-transparent text-right appearance-none"
+          />
+        </div>
+        <span className="text-6xl font-light bg-transparent">:</span>
+        <div className="relative flex">
+          <span aria-hidden="true" className="text-6xl font-light opacity-0">
+            {"00"}
+          </span>
+          <input
+            type="number"
+            inputMode="numeric"
+            value={minutes}
+            onChange={(event) => setMinutes(event.target.value)}
+            disabled={disabled}
+            max={59}
+            min={0}
+            step={1}
+            className="absolute h-full w-full left-0 top-0 border-none outline-none disabled:opacity-100 text-6xl font-light bg-transparent text-right appearance-none"
+          />
+        </div>
+        <span className="text-6xl font-light bg-transparent">:</span>
+        <div className="relative flex">
+          <div className="relative flex">
+            <span aria-hidden="true" className="text-6xl font-light opacity-0">
+              {"00"}
+            </span>
+            <input
+              type="number"
+              inputMode="numeric"
+              value={seconds}
+              onChange={(event) => setSeconds(event.target.value)}
+              disabled={disabled}
+              max={59}
+              min={0}
+              step={1}
+              className="absolute h-full w-full left-0 top-0 border-none outline-none disabled:opacity-100 text-6xl font-light bg-transparent text-right appearance-none"
+            />
+          </div>
+        </div>
       </div>
       <div className="flex justify-center items-center text-danger">
         {percentage && Number(percentage.toFixed(2)) !== 0 && (
